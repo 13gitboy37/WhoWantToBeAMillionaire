@@ -13,7 +13,10 @@ struct Record: Codable {
 }
 
 final class Game {
+    
+   //MARK: - Static properties
     static let shared = Game()
+    static let gameSession = GameSession()
     
     var questions: [Questions] = [
         Questions(question: "Какую фамилию носил главный герой поэмы                                                  А. Твардовского?",
@@ -49,16 +52,16 @@ final class Game {
 
     static let questionBuilder = QuestionsBuilder()
     
+    //MARK: - Private properties
     private (set) var records: [Record] = [] {
         didSet {
             caretaker.save(records: self.records)
         }
     }
     
-    static let gameSession = GameSession()
-    
     private let caretaker = Caretaker()
     
+    //MARK: - Init
     private init() {
         self.records = self.caretaker.retrieveRecords()
         self.caretaker.retrieveQuestions().forEach { question in
@@ -66,6 +69,7 @@ final class Game {
         }
     }
     
+    //MARK: - Methods
     func addRecord(_ record: Record) {
         self.records.append(record)
         Game.gameSession.clearGameSession()
