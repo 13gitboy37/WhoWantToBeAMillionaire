@@ -14,6 +14,8 @@ class GameSession {
     var tapHallHelp = false
     var tapFiftyFifty = false
     var howMoneyWin = ""
+    var score = Observable<String>("")
+    var numQuestion = Observable<Int>(0)
 
     func clearGameSession() {
         rightAnswer = 0
@@ -21,5 +23,7 @@ class GameSession {
         tapFiftyFifty = false
         tapCallFriend = false
         tapHallHelp = false
+        score.value = ""
+        numQuestion.value = 0
     }
 }

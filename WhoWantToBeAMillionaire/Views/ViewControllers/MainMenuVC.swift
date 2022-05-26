@@ -7,9 +7,21 @@
 
 import UIKit
 
-class MainMenu: UIViewController {
+class MainMenuVC: UIViewController {
 
     @IBOutlet weak var lastResultLabel: UILabel!
+    @IBOutlet weak var difficultyControl: UISegmentedControl!
+    
+    private var selectedDifficulty: Difficulty {
+        switch self .difficultyControl.selectedSegmentIndex {
+        case 0:
+            return .easy
+        case 1:
+            return .medium
+        default:
+            return .medium
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +31,7 @@ class MainMenu: UIViewController {
         switch segue.identifier {
         case "startGameSegue":
             guard let destination = segue.destination as? GameVC else { return }
+            destination.difficulty = selectedDifficulty
             destination.gameDelegate = self
             Game.gameSession.clearGameSession()
         default:
@@ -27,7 +40,7 @@ class MainMenu: UIViewController {
     }
 }
 
-extension MainMenu: GameVCDelegate {
+extension MainMenuVC: GameVCDelegate {
     func didEndGame(withResult result: String) {
         lastResultLabel.isHidden = false
         self.lastResultLabel.text = "Последний результат: \(result)"
