@@ -8,18 +8,19 @@
 import Foundation
 
 struct Questions: Codable {
-    
     var question: String
     var answers: [String]
     var correctAnswer: String
 }
 
 class QuestionsBuilder {
-
+    
+//MARK: - Properties
     var question = String()
     var answers =  [String]()
     var correctAnswer = String()
-
+    
+//MARK: - Methods 
     func build() -> Questions {
         return Questions(question: question, answers: answers, correctAnswer: correctAnswer)
     }

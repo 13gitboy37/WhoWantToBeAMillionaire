@@ -24,8 +24,6 @@ class AddQuestionCell: UITableViewCell {
     var delegateCell: AddQuestionCellDelegate?
     var question = Questions(question: "", answers: [""], correctAnswer: "")
     
-   
-    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
